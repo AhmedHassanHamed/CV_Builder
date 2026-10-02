@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="CV Builder — أنشئ سيرتك الذاتية الاحترافية PDF وWord عربي وإنجليزي."
+    />
+    <title>CV Builder</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="imgs/CV_icon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <noscript
+      >يلزم تفعيل JavaScript لتشغيل الأداة / JavaScript is required.</noscript
+    >
+
+    <!-- ===== الشريط العلوي: لغة / وضع / لون / قالب / تصدير ===== -->
+    <header class="topbar">
+      <div class="brandbar">
+        <strong class="brand" data-i="app_name"></strong>
+        <img src="imgs/CV_icon.png" alt="CV Builder" id="cvImg" />
+      </div>
+      <div class="tools">
+        <select id="tpl" aria-label="template">
+          <option value="modern" data-i="tpl_modern"></option>
+          <option value="minimal" data-i="tpl_minimal"></option>
+        </select>
+        <input type="color" id="color" aria-label="accent color" />
+        <button id="btnTheme" class="ghost" aria-label="dark mode">◐</button>
+        <button id="btnLang" class="ghost">EN</button>
+        <button id="btnDemo" class="ghost" data-i="btn_demo"></button>
+        <button id="btnPdf" class="primary" data-i="btn_pdf"></button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- ===== الفورم ===== -->
+      <section class="form-panel" id="form">
+        <fieldset>
+          <legend data-i="sec_personal"></legend>
+          <input data-p="name" data-ph="f_name" />
+          <input data-p="title" data-ph="f_title" />
+          <input data-p="email" data-ph="f_email" type="email" />
+          <input data-p="phone" data-ph="f_phone" />
+          <input data-p="city" data-ph="f_city" />
+          <input data-p="site" data-ph="f_site" />
+          <div class="photo-pick">
+            <span data-i="f_photo"></span
+            ><input type="file" id="photoFile" accept="image/*" /><button
+              type="button"
+              class="ghost"
+              id="photoRm"
+              data-i="photo_rm"
+            ></button>
+          </div>
+          <textarea data-p="summary" data-ph="f_summary" rows="4"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_exp"></legend>
+          <div id="list-exp"></div>
+          <button class="ghost add" data-add="exp" data-i="btn_add"></button>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_edu"></legend>
+          <div id="list-edu"></div>
+          <button class="ghost add" data-add="edu" data-i="btn_add"></button>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_skills"></legend>
+          <textarea data-k="skills" data-ph="f_skills" rows="2"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_langs"></legend>
+          <textarea data-k="langs" data-ph="f_langs" rows="2"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_refs"></legend>
+          <div id="list-refs"></div>
+          <button class="ghost add" data-add="refs" data-i="btn_add"></button>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_proj"></legend>
+          <div id="list-proj"></div>
+          <button class="ghost add" data-add="proj" data-i="btn_add"></button>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_courses"></legend>
+          <div id="list-courses"></div>
+          <button
+            class="ghost add"
+            data-add="courses"
+            data-i="btn_add"
+          ></button>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_interests"></legend>
+          <textarea
+            data-k="interests"
+            data-ph="f_interests"
+            rows="2"
+          ></textarea>
+        </fieldset>
+        <fieldset>
+          <legend data-i="sec_custom"></legend>
+          <input data-k="customTitle" data-ph="f_ctitle" />
+          <textarea data-k="customText" data-ph="f_ctext" rows="3"></textarea>
+        </fieldset>
+      </section>
+
+      <!-- ===== المعاينة الحية ===== -->
+      <section class="preview-panel">
+        <div class="progress">
+          <div class="bar"><span id="barFill"></span></div>
+          <small id="barText"></small>
+        </div>
+        <div id="empty" class="empty" hidden>
+          <h2 data-i="empty_title"></h2>
+          <ol>
+            <li data-i="empty_1"></li>
+            <li data-i="empty_2"></li>
+            <li data-i="empty_3"></li>
+          </ol>
+          <button class="primary" data-act="demo" data-i="btn_demo"></button>
+        </div>
+        <div id="sheetWrap"><article id="sheet"></article></div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <!-- ===== Footer: روابط التواصل ===== -->
+    <footer class="site-footer">
+      <h3 id="footerHeading">Let's Connect</h3>
+      <div class="footer-links">
+        <a
+          href="https://ahmedhassanhamed.github.io/AhmedHassanHamed/"
+          class="footer-item"
+          target="_blank"
+          rel="noopener"
+          ><img src="imgs/Ahmed.jpeg" alt="Profile" /><span>Portfolio</span></a
+        >
+        <a
+          href="https://wa.me/201147729020"
+          class="footer-item"
+          target="_blank"
+          rel="noopener"
+          ><img src="imgs/WhatsApp.jpeg" alt="WhatsApp" /><span
+            >WhatsApp</span
+          ></a
+        >
+        <a href="mailto:ahmed.hassan.dev77@gmail.com" class="footer-item"
+          ><img src="imgs/Email.jpeg" alt="Email" /><span>Email</span></a
+        >
+        <a
+          href="https://github.com/AhmedHassanHamed"
+          class="footer-item"
+          target="_blank"
+          rel="noopener"
+          ><img src="imgs/GitHub.jpeg" alt="GitHub" /><span>GitHub</span></a
+        >
+        <a
+          href="https://khamsat.com/user/hassanhamed_cz"
+          class="footer-item"
+          target="_blank"
+          rel="noopener"
+          ><img src="imgs/Khamsat.jpeg" alt="Khamsat" /><span>Khamsat</span></a
+        >
+        <a
+          href="https://mostaql.com/u/Ahmed_Hassan_CZ"
+          class="footer-item"
+          target="_blank"
+          rel="noopener"
+          ><img src="imgs/Mostaql.jpeg" alt="Mostaql" /><span>Mostaql</span></a
+        >
+      </div>
+      <p class="copyright">
+        &copy; <span id="currentYear">2026</span> Ahmed Hassan.
+        <span>All rights reserved.</span>
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+    <script src="lang.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

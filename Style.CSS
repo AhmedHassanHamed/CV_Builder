@@ -1,0 +1,754 @@
+/* ===== style.css — الأساس ===== */
+/* ===== 1. المتغيرات (نهاري / ليلي) ===== */
+:root {
+  --bg: #f4f5f7;
+  --panel: #fff;
+  --ink: #1c2230;
+  --muted: #6b7385;
+  --line: #dfe3ea;
+  --accent: #0f766e;
+}
+:root[data-theme="dark"] {
+  --bg: #12151c;
+  --panel: #1b2029;
+  --ink: #e8ebf2;
+  --muted: #9099ad;
+  --line: #2c3340;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Cairo", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+[hidden] {
+  display: none !important;
+}
+
+/* ===== 2. الشريط العلوي والأزرار ===== */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+button,
+select {
+  font: inherit;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+}
+button.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+input[type="color"] {
+  width: 38px;
+  height: 36px;
+  padding: 2px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+/* ===== 3. التخطيط والفورم ===== */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: start;
+}
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+fieldset {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.8rem;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+legend {
+  font-weight: 700;
+  padding: 0 0.4rem;
+}
+input,
+textarea {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+}
+.item {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+.item .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+.item .rm {
+  position: absolute;
+  inset-block-start: 0.3rem;
+  inset-inline-end: 0.3rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.8rem;
+}
+.item input:first-of-type {
+  margin-inline-end: 0;
+  padding-inline-end: 2rem;
+}
+
+/* ===== 4. التقدم / الحالة الفارغة / التنبيه ===== */
+.progress {
+  margin-bottom: 0.7rem;
+}
+.bar {
+  height: 8px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+.progress small {
+  color: var(--muted);
+}
+.empty {
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 1.5rem;
+  line-height: 2;
+}
+.toast {
+  position: fixed;
+  inset-block-end: 1rem;
+  inset-inline: 0;
+  margin: auto;
+  width: max-content;
+  max-width: 90vw;
+  background: #222;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  z-index: 9;
+}
+.toast button {
+  background: transparent;
+  color: #ffd166;
+  border: 0;
+  font-weight: 700;
+}
+
+/* ===== 5. ورقة السيرة (A4 دائمًا أبيض) ===== */
+#sheetWrap {
+  overflow: hidden;
+}
+#sheet {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  color: #1c2230;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  transform-origin: top;
+  line-height: 1.55;
+  font-size: 10.5pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.cv ul {
+  margin: 0.2rem 0 0;
+  padding-inline-start: 1.1rem;
+}
+.cv h1 {
+  margin: 0;
+  font-size: 2.29em;
+  line-height: 1.15;
+}
+.cv h2 {
+  font-size: 1.1em;
+  margin: 1rem 0 0.4rem;
+  color: var(--accent);
+}
+.job,
+.edu {
+  break-inside: avoid;
+  margin-bottom: 0.6rem;
+}
+.job b,
+.edu b {
+  display: block;
+}
+.meta {
+  color: #5b6475;
+  font-size: 0.9em;
+}
+
+/* --- قالب Modern: شريط جانبي ملوّن يمتد عبر الصفحات --- */
+.t-modern {
+  --dir: to right;
+  display: grid;
+  grid-template-columns: 32% 68%;
+  min-height: 297mm;
+  background: linear-gradient(var(--dir), var(--accent) 32%, #fff 32%);
+}
+[dir="rtl"] .t-modern {
+  --dir: to left;
+}
+.t-modern aside {
+  color: #fff;
+  padding: 14mm 8mm;
+}
+.t-modern aside h2 {
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 0.2rem;
+}
+.t-modern aside p,
+.t-modern aside li {
+  margin: 0.15rem 0;
+  word-break: break-word;
+  font-size: 0.9em;
+}
+.t-modern aside ul {
+  list-style: none;
+  padding: 0;
+}
+.t-modern .main {
+  padding: 14mm 10mm;
+}
+.t-modern .main .role {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+/* --- قالب Minimal: عمود واحد بدون عناصر تربك أنظمة ATS --- */
+.t-minimal {
+  padding: 16mm 15mm;
+}
+.t-minimal header {
+  border-bottom: 2px solid #1c2230;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+.t-minimal h2 {
+  color: #1c2230;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.15rem;
+  text-transform: none;
+}
+
+/* ===== 6. الموبايل والطباعة ===== */
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  body {
+    background: #fff;
+  }
+  .topbar,
+  .form-panel,
+  .progress,
+  .toast,
+  .empty {
+    display: none !important;
+  }
+  .layout {
+    display: block;
+    padding: 0;
+  }
+  #sheetWrap {
+    overflow: visible;
+    height: auto !important;
+  }
+  #sheet {
+    zoom: 1 !important;
+    transform: none !important;
+    box-shadow: none;
+  }
+}
+
+/* ===== features: قوالب + نوافذ ===== */
+/* ===== features.css — إصلاح التداخل + قوالب جديدة + نوافذ ===== */
+/* إصلاح: العمود 1fr كان بيتمدد لعرض الورقة (794px) ويركب على الفورم */
+.layout {
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+}
+.preview-panel {
+  min-width: 0;
+}
+
+/* قالب Executive: عمود واحد، خط سيريف، ترويسة في المنتصف */
+.t-exec {
+  padding: 16mm 16mm;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+}
+.t-exec header {
+  text-align: center;
+  border-bottom: 3px double var(--accent);
+  padding-bottom: 0.7rem;
+}
+.t-exec .role {
+  font-size: 1.24em;
+  color: var(--accent);
+  margin: 0.2rem 0;
+}
+.t-exec h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.15rem;
+}
+
+/* قالب Creative: شريط علوي ملوّن + عمودين */
+.t-creative header {
+  background: var(--accent);
+  color: #fff;
+  padding: 14mm 14mm 10mm;
+}
+.t-creative .role {
+  font-size: 1.24em;
+  opacity: 0.9;
+}
+.t-creative .body {
+  display: grid;
+  grid-template-columns: 64% 36%;
+  gap: 0;
+}
+.t-creative .col {
+  padding: 6mm 10mm 12mm 14mm;
+}
+.t-creative aside {
+  background: #f1f3f6;
+  padding: 6mm 8mm 12mm;
+}
+.t-creative aside p {
+  margin: 0.15rem 0;
+  word-break: break-word;
+  font-size: 0.9em;
+}
+.pill {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 99px;
+  padding: 0.05rem 0.65rem;
+  margin: 0.15rem;
+  font-size: 0.86em;
+}
+
+/* نافذة فحص ATS */
+dialog {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--ink);
+  width: min(480px, 92vw);
+  padding: 1rem;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+.ats-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.ats-list .ok {
+  color: #15803d;
+}
+.ats-list .no {
+  color: #b91c1c;
+}
+.ats-score {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+@media print {
+  dialog {
+    display: none !important;
+  }
+}
+
+/* ===== extras: تخطيط + سحب + QR + طباعة ===== */
+/* ===== extras.css — تخطيط بدون فراغات + قوالب + سحب وإفلات + QR ===== */
+/* كل عمود بيسكرول لوحده داخل ارتفاع الشاشة، فمفيش فراغ تحت العمود الأقصر */
+@media (min-width: 861px) {
+  .layout {
+    height: max(480px, calc(100dvh - var(--hdr, 76px)));
+    padding: 0.8rem 1rem;
+    overflow: hidden;
+  }
+  .form-panel,
+  .preview-panel {
+    height: 100%;
+    max-height: none;
+    position: static;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+  .preview-panel {
+    background: var(--line);
+    border-radius: 12px;
+    padding: 0.8rem;
+  }
+}
+.preview-panel .progress {
+  margin-bottom: 0.6rem;
+}
+#sheet {
+  position: relative;
+  margin-inline: auto;
+}
+/* خطوط توضح مكان فصل صفحات A4 (على الشاشة فقط) */
+#sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(297mm - 1px),
+    rgba(220, 38, 38, 0.45) calc(297mm - 1px),
+    rgba(220, 38, 38, 0.45) 297mm
+  );
+}
+
+/* مقابض السحب */
+fieldset {
+  position: relative;
+}
+.grip {
+  cursor: grab;
+  user-select: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.grip.sec {
+  position: absolute;
+  inset-block-start: 0.55rem;
+  inset-inline-end: 0.8rem;
+}
+.item .grip {
+  position: absolute;
+  inset-block-start: 0.4rem;
+  inset-inline-start: 0.45rem;
+}
+.item > input:first-of-type {
+  padding-inline-start: 1.6rem;
+}
+.preset {
+  margin-bottom: 0.2rem;
+}
+
+/* قالب Timeline: خط زمني للخبرات */
+.t-timeline h1 {
+  color: var(--accent);
+}
+.t-timeline .job,
+.t-timeline .edu {
+  border-inline-start: 2px solid var(--accent);
+  padding-inline-start: 0.9rem;
+  position: relative;
+}
+.t-timeline .job::before,
+.t-timeline .edu::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -6px;
+  inset-block-start: 0.45rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* قالب Compact: مضغوط للسير الطويلة */
+.t-compact {
+  padding: 11mm 12mm;
+  font-size: 0.9em;
+  line-height: 1.45;
+}
+.t-compact h1 {
+  font-size: 1.9em;
+}
+.t-compact h2 {
+  margin: 0.7rem 0 0.25rem;
+}
+.t-compact header {
+  padding-bottom: 0.4rem;
+}
+
+/* QR */
+.qr {
+  margin-top: 0.8rem;
+  break-inside: avoid;
+}
+.qr img {
+  width: 24mm;
+  height: 24mm;
+  image-rendering: pixelated;
+  background: #fff;
+  padding: 1.5mm;
+  display: block;
+}
+.qr small {
+  font-size: 0.76em;
+  opacity: 0.8;
+}
+
+@media print {
+  .layout {
+    height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+  .form-panel,
+  .preview-panel {
+    height: auto;
+    overflow: visible;
+    background: none;
+    padding: 0;
+  }
+  #sheet::after {
+    display: none;
+  }
+}
+
+/* ===== طباعة/PDF: اطبع الورقة فقط (بدون الفوتر ولا الهيدر) وفي صفحة واحدة ===== */
+@media print {
+  html,
+  body {
+    height: auto;
+    margin: 0;
+    background: #fff;
+  }
+  body > *:not(.layout) {
+    display: none !important;
+  }
+  .preview-panel > *:not(#sheetWrap) {
+    display: none !important;
+  }
+  .cv,
+  #sheet {
+    min-height: 296mm !important;
+  }
+}
+.grip {
+  font-weight: 700;
+  letter-spacing: -0.25em;
+  color: var(--ink);
+  opacity: 0.55;
+}
+
+/* ===== الهيدر (الشعار) والفوتر ===== */
+.brand {
+  font-size: 30px;
+  font-weight: 700;
+  color: #505d7a;
+}
+#cvImg {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+.site-footer {
+  background: #1e293b;
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: auto;
+  width: 100%;
+}
+#footerHeading {
+  margin: 0 0 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #38bdf8;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  text-decoration: none;
+}
+.footer-item:hover {
+  text-decoration: underline;
+}
+.footer-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.copyright {
+  font-size: 13px;
+  opacity: 0.8;
+  margin: 8px 0 0;
+}
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.layout {
+  width: 100%;
+}
+
+/* ===== صورة شخصية + قالب Professional + المراجع ===== */
+.photo {
+  width: 38mm;
+  height: 38mm;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 6mm;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+}
+.photo-pick {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+.t-pro aside ul {
+  list-style: disc;
+  padding-inline-start: 1.1rem;
+}
+.t-pro aside .edu {
+  margin-bottom: 0.5rem;
+}
+.t-pro aside .edu b {
+  display: block;
+}
+.t-pro h1 {
+  letter-spacing: 0.06em;
+}
+.t-pro .main .role {
+  color: #555;
+  letter-spacing: 0.1em;
+}
+.t-pro .main h2 {
+  color: #1c2230;
+  border-bottom: 2px solid #1c2230;
+  padding-bottom: 0.15rem;
+  letter-spacing: 0.04em;
+}
+.t-pro .jh {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.t-pro .jr {
+  color: #444;
+}
+.refs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.ref {
+  break-inside: avoid;
+}
+.ref small {
+  display: block;
+  color: #5b6475;
+}
+
+/* ===== الهيدر: الشعار والاسم في النص قريبين من بعض، والأدوات تحتهم ===== */
+.topbar {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  position: static;
+}
+.brandbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+.tools {
+  justify-content: center;
+}
+.t-modern aside .meta {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#sheet.measuring .cv {
+  min-height: 0 !important;
+}
